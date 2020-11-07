@@ -162,6 +162,7 @@ include_directories(
 catkin_install_python(PROGRAMS
   src/testuse/hello_world.py
   scripts/talker/talker.py
+  scripts/listener/listener.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
