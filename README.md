@@ -136,6 +136,8 @@ add in AddTwoInts.srv
     ---
     int64 sum
 ```
+### server&client
+---
 Create the scripts/service/server.py   
 Create the scripts/client/client.py   
 ```
