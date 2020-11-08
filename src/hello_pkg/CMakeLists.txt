@@ -12,6 +12,8 @@ find_package(catkin REQUIRED COMPONENTS
   rospy
   std_msgs
   message_generation
+  sensor_msgs
+  geometry_msgs
 )
 
 ## System dependencies are found with CMake's conventions
@@ -58,7 +60,7 @@ find_package(catkin REQUIRED COMPONENTS
 add_service_files(
   FILES
   AddTwoInts.srv
-  # Service2.srv
+  ParamAction.srv
 )
 
 ## Generate actions in the 'action' folder
@@ -71,6 +73,8 @@ add_service_files(
 ## Generate added messages and services with any dependencies listed here
 generate_messages(
   DEPENDENCIES
+  # geometry_msgs
+  # sensor_msgs
   std_msgs
 )
 
@@ -166,6 +170,7 @@ catkin_install_python(PROGRAMS
   scripts/listener/listener.py
   scripts/service/server.py 
   scripts/client/client.py
+  param_test/param_test.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
