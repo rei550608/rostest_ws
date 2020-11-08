@@ -65,7 +65,7 @@ $ catkin_make
 $ source devel/setup.bash
 $ rosrun hello_pkg hello_world.py
 ```
-### Publisher
+## Publisher
 ---
 back to hello_pkg and create a folder
 ```
@@ -79,7 +79,7 @@ back to hello_pkg and edit CmakeKists.txt
 ```
 catkin_install_python(PROGRAMS
   src/testuse/hello_world.py
-  scripts/talker/talker.py
+  scripts/talker/talker.py #added
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 ```
@@ -88,7 +88,7 @@ check your whole workspace is ok-to-run
 $ cd ~/rostest_ws
 $ catkin_make
 ```
-### Subscriber
+## Subscriber
 ---
 back to hello_pkg and create a folder
 ```
@@ -103,7 +103,7 @@ back to hello_pkg and edit CmakeKists.txt
 catkin_install_python(PROGRAMS
   src/testuse/hello_world.py
   scripts/talker/talker.py
-  scripts/listener/listener.py
+  scripts/listener/listener.py #added
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 ```
@@ -119,4 +119,82 @@ one terminal run
 $ rosrun hello_pkg talker.py
 another one run
 $ rosrun hello_pkg listener.py 
+```
+## service
+---
+### srv
+---
+```
+$ cd ~/rostest_ws/src/hello_pkg/
+$ mkdir srv
+$ touch AddTwoInts.srv
+```
+add in AddTwoInts.srv
+```
+    int64 a
+    int64 b
+    ---
+    int64 sum
+```
+Create the scripts/service/server.py   
+Create the scripts/client/client.py   
+```
+$ cd ~/rostest_ws/src/hello_pkg/scritps
+$ mkdir service
+$ touch server.py
+$ chmod +x server.py
+$ cd ~/rostest_ws/src/hello_pkg/scritps
+$ mkdir client
+$ touch client.py
+$ chmod +x client.py
+```
+To use service, we have to add dependencies in our package.xml.    
+Go to package.xml, and add dependencies.
+```
+  <build_depend>message_generation</build_depend>
+  <exec_depend>message_runtime</exec_depend>
+```
+Also add the nodes u wanna use in CmakeLists.txt
+```
+catkin_install_python(PROGRAMS
+  src/testuse/hello_world.py
+  scripts/talker/talker.py
+  scripts/listener/listener.py
+  scripts/service/server.py #added
+  scripts/client/client.py  #added
+  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
+```
+Do the catkin_make in root of workspace
+```
+$ cd ~/rostest_ws
+$ catkin_make
+```
+Open the server.py
+```
+$ rosrun hello_pkg server.py
+```
+Terminal should show
+```
+~/rostest_ws$ rosrun hello_pkg server.py 
+Ready to add two ints.
+```
+Then in new terminal open client.py
+```
+$ rosrun hello_pkg client.py
+```
+Terminal should show
+```
+~/rostest_ws$ rosrun hello_pkg client.py 
+/home/username/rostest_ws/src/hello_pkg/scripts/client/client.py [x y]
+```
+Then run
+```
+$ rosrun hello_pkg client.py 4 5
+```
+and you will get
+```
+~/rostest_ws$ rosrun hello_pkg client.py 4 5
+Requesting 4+5
+4 + 5 = 9 
 ```
