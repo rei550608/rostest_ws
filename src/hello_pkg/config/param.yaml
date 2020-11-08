@@ -1,0 +1,10 @@
+rosdistro: 'melodic
+
+  '
+roslaunch:
+  uris: {host_localhost__36903: 'http://localhost:36903/', host_localhost__39003: 'http://localhost:39003/'}
+rosversion: '1.14.9
+
+  '
+run_id: 425bc5ee-21ea-11eb-8925-0c5415f47545
+test: 100

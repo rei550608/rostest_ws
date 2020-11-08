@@ -1,0 +1,6 @@
+<?xml version="1.0" ?>
+<launch>
+    <include file="$(find hello_pkg)/launch/test1.launch" />
+
+    <node name="listener" pkg="hello_pkg" type="listener.py"/>
+</launch>

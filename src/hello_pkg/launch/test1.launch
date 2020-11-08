@@ -1,0 +1,7 @@
+<?xml version="1.0" ?>
+<launch>
+    <rosparam command="load" file="$(find hello_pkg)/config/param.yaml" />
+    <rosparam command="load" file="$(find hello_pkg)/config/param.yaml" ns="test1/" />
+
+    <node name="chatter" pkg="hello_pkg" type="talker.py"/>
+</launch>
